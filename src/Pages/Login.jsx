@@ -19,12 +19,14 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AlertSuccess, AuthSuccess, LoginFailure, LoginSuccess } from "../Context/AuthContext/Action";
+
 export default function Login() {
   const toast = useToast();
   const { dispatch } = useContext(AuthContext);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
+    appType: 'music'
   });
 
   const navigate = useNavigate();
@@ -40,8 +42,12 @@ export default function Login() {
   const handleClick = async () => {
     axios({
       method: "POST",
-      url: "https://reqres.in/api/register",
+      url: "https://academics.newtonschool.co/api/v1/user/login",
       data: loginData,
+      headers: {
+        'Content-Type': 'application/json',
+        "projectId": "ghmumg9x1zid"
+    },
     })
       .then((res) => {
         console.log(res.data.token);

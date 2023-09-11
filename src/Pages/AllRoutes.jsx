@@ -7,8 +7,12 @@ import Music from './Music'
 import Payment from './Payment'
 import PremiumPlan from './PremiumPlan'
 import Register from './Register'
+import {useState} from 'react'
 
 export default function AllRoutes() {
+  const[islogedin,setlogedin] = useState('false');
+  
+
   return (
     <Routes>
         <Route path="/" element={<Homepage />}></Route>

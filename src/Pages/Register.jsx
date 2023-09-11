@@ -31,6 +31,8 @@ export default function Register() {
   const [data, setData] = useState({
     email: "",
     password: "",
+    name: "",
+    appType: 'music'
   });
 
   const handleChange = (e) => {
@@ -45,8 +47,12 @@ export default function Register() {
   const handleClick = () => {
     axios({
       method: "POST",
-      url: "https://reqres.in/api/register",
+      url: "https://academics.newtonschool.co/api/v1/user/signup",
       data: data,
+        headers: {
+        'Content-Type': 'application/json',
+        "projectId": "ghmumg9x1zid"
+    },
     })
       .then((res) => {
         console.log(res.data.token);
@@ -130,6 +136,17 @@ export default function Register() {
           </Button>
         </Box>
         <Box mt="1.4rem">
+        <Input
+            color="white"
+            type="name"
+            name="name"
+            value={data.name}
+            onChange={(e) => handleChange(e)}
+            variant="flushed"
+            w="sm"
+            placeholder="name"
+            focusBorderColor="red"
+          />
           <Input
             color="white"
             type="email"
