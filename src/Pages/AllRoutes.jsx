@@ -7,21 +7,22 @@ import Music from './Music'
 import Payment from './Payment'
 import PremiumPlan from './PremiumPlan'
 import Register from './Register'
-import {useState} from 'react'
+import {useState, useEffect, useContext} from 'react'
+import { AuthContext } from "../Context/AuthContext/AuthContext";
+import {  AuthSuccess } from "../Context/AuthContext/Action";
+import Protected from './Protected'
 
-export default function AllRoutes() {
-  const[islogedin,setlogedin] = useState('false');
-  
-
+export default function AllRoutes({isLogedin, setIsLogedin}) {
+  const { dispatch } = useContext(AuthContext);
   return (
     <Routes>
-        <Route path="/" element={<Homepage />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/music" element={<Music/>}></Route>
-        <Route path="/movies" element={<Movies />}></Route>
+        <Route path="/" element={<Protected isLogedin ={isLogedin} Component = {<Homepage isLogedin={isLogedin} />}/>}></Route>
+        <Route path="/login" element={<Login isLogedin={isLogedin} setIsLogedin={setIsLogedin} />}></Route>
+        <Route path="/music" element={<Protected isLogedin = {isLogedin} Component = {<Music/>}/>}></Route>
+        <Route path="/movies" element={<Protected isLogedin = { isLogedin} Component = {<Movies />}/>}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/premiumplan" element={<PremiumPlan />}></Route>
-        <Route path="/payment" element={<Payment />}></Route>
+        <Route path="/premiumplan" element={<Protected isLogedin = {isLogedin} Component = {<PremiumPlan />}/>}></Route>
+        <Route path="/payment" element={<Protected isLogedin = {isLogedin} Component = {<Payment />}/>}></Route>
     </Routes>
   )
 }

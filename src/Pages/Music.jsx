@@ -126,6 +126,7 @@ const music = [
 ];
 
 const Music = () => {
+  console.log("mymusic")
   return (
     <Box>
       <Box>

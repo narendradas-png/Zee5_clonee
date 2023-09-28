@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Box,
   Button,
@@ -7,7 +7,8 @@ import {
   Heading,
   Input,
   Text,
-  useToast
+  useToast,
+
 } from "@chakra-ui/react";
 import { AuthContext } from "../Context/AuthContext/AuthContext";
 import { FaApple } from "react-icons/fa";
@@ -20,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AlertSuccess, AuthSuccess, LoginFailure, LoginSuccess } from "../Context/AuthContext/Action";
 
-export default function Login() {
+export default function Login({isLogedin,setIsLogedin}) {
   const toast = useToast();
   const { dispatch } = useContext(AuthContext);
   const [loginData, setLoginData] = useState({
@@ -28,6 +29,15 @@ export default function Login() {
     password: "",
     appType: 'music'
   });
+  useEffect(() =>{
+    const ten = localStorage.getItem('Zee5-token')
+    console.log(isLogedin);
+    if(ten)
+    {setIsLogedin(true)
+      dispatch(AuthSuccess(true));
+      navigate("/")}
+  
+  })
 
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -66,6 +76,8 @@ export default function Login() {
           position: ["top"],
           isClosable: true,
         });
+        localStorage.setItem("Zee5-token",true)
+        setIsLogedin(true)
         navigate("/");
       })
       .catch((err) => {
@@ -84,6 +96,7 @@ export default function Login() {
         console.log("Success");
       });
   };
+
 
   return (
     <Box>
@@ -179,6 +192,7 @@ export default function Login() {
           >
             Login
           </Button>
+          
         </Box>
         <Box mt="2rem">
           <Flex justify="center">

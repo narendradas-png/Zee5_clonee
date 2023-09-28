@@ -16,9 +16,17 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { RiVipCrownFill } from "react-icons/ri";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import React,{useContext} from "react";
+import { AlertSuccess, AuthSuccess, LoginFailure, LoginSuccess } from "../../Context/AuthContext/Action"
+import { useNavigate } from "react-router-dom";
 
 export default function MenuLink() {
-  const {state} = useContext(AuthContext)
+  const {state,dispatch} = useContext(AuthContext)
+  const {navigate} = useNavigate ()
+  const logout = () => {
+    dispatch(AuthSuccess(false));
+    localStorage.removeItem('Zee5-token')
+    navigate ('/login')
+  }
   return (
     <Flex>
       <HStack gap="30px">
@@ -79,6 +87,14 @@ export default function MenuLink() {
             )
           }
           
+        </Box>
+        <Box>
+        {
+          state.auth === true ? ( 
+          <button onClick= {logout }>Logout</button>
+          ):null
+            
+        }
         </Box>
       </HStack>
     </Flex>

@@ -4,10 +4,10 @@ import SliderFunction from '../Components/Slider/SliderFunction'
 import Footer from './Footer'
 import Movies from "./Movies"
 
-export default function Homepage() {
+export default function Homepage({isLogedin}) {
   return (
     <div>
-        <Navbar />
+        <Navbar isLogedin = {isLogedin} />
         <SliderFunction />
         <Movies/>
         <Footer />

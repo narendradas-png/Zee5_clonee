@@ -119,15 +119,15 @@ export default function DrawerApp() {
                   <h2>
                     <AccordionButton>
                       <Box flex="1" textAlign="left">
-                        Settings
+                        Update Password
                       </Box>
                       <AccordionIcon />
                     </AccordionButton>
                   </h2>
                   <AccordionPanel pb={4}>
-                    <Link>Language</Link>
+                    <Link> </Link>
                     <br />
-                    <Link>Reset setting to default</Link>
+                    <Link> </Link>
                   </AccordionPanel>
                 </AccordionItem>
 
